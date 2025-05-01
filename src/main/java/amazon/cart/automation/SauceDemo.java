@@ -1,3 +1,5 @@
+package amazon.cart.automation;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -7,18 +9,16 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import amazon.cart.automation.Utils;
 
 import java.time.Duration;
 
-public class AmazonCartAutomation {
+import static amazon.cart.automation.Utils.pause;
+
+public class SauceDemo {
     public static void main(String args[]) {
-        WebDriverManager.chromedriver().setup();
-        ChromeOptions options = new ChromeOptions();
-       options.addArguments("--incognito");
-        WebDriver driver = new ChromeDriver(options);
+        WebDriver driver = Utils.getIncognitoDriver();
         //explict wait- until a sepecific condition true or 10 seconds pass
-        // sets default waiting time for finding elements
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get("https://www.saucedemo.com");
         login(driver);
         pause(500);
@@ -83,11 +83,4 @@ public class AmazonCartAutomation {
         driver.findElement(By.id("finish")).click();
     }
 
-    public static void pause(int ms) {
-        try {
-            Thread.sleep(ms);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
 }
